@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
 import { Button } from "../components/ui";
+import { ClerkProviderWrapper } from "../components/clerk-provider";
+import { AuthNav } from "../components/auth-nav";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -29,18 +31,21 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <div className="min-h-screen">
-          <header className="border-b">
-            <div className="container mx-auto px-4 py-3 flex items-center justify-between">
-              <h1 className="text-lg font-semibold">Exec-OS</h1>
-              <div>
-                <Button>Primary</Button>
+        <ClerkProviderWrapper>
+          <div className="min-h-screen">
+            <header className="border-b">
+              <div className="container mx-auto px-4 py-3 flex items-center justify-between">
+                <h1 className="text-lg font-semibold">Exec-OS</h1>
+                <div className="flex items-center gap-4">
+                  <Button>Primary</Button>
+                  <AuthNav />
+                </div>
               </div>
-            </div>
-          </header>
+            </header>
 
-          <main className="container mx-auto px-4 py-6">{children}</main>
-        </div>
+            <main className="container mx-auto px-4 py-6">{children}</main>
+          </div>
+        </ClerkProviderWrapper>
       </body>
     </html>
   );
